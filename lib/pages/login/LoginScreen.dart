@@ -9,14 +9,16 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends View<LoginScreen> {
   LoginPresenter _presenter;
+
+  @override
+  void initStateWithContext(BuildContext context) {
+    super.initStateWithContext(context);
+    _presenter = LoginPresenter(context, this);
+  }
+
   @override
   Widget buildView(BuildContext context) {
 
-    @override
-    void initStateWithContext(BuildContext context) {
-      super.initStateWithContext(context);
-      _presenter = LoginPresenter(context, this);
-    }
 
     return Scaffold(
       body: Center(
