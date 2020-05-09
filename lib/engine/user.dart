@@ -22,7 +22,7 @@ class _User extends PertaminaEngine {
         param: params,
         needToken: false,
         token: token,
-        processName: "login"
+        processName: "Login"
     );
 
     if (result == null || (result as Map).isEmpty) return false;
@@ -31,11 +31,36 @@ class _User extends PertaminaEngine {
       Toast.showToast(context, "Error : ${result["error_message"]}");
       return false;
     }
-    await AccountHelper.saveUserInfo(username, result);
+    await AccountHelper.saveToken(username, result);
     //await registerTokenFirebase(context, tokenFirebase: application.tokenFirebase);
 
-
     return true;
+  }
+
+  Future<UserProfileModel> userProfile(BuildContext context,
+      {CancelToken token}) async {
+    String url = PertaminaEngine.baseUrl + "/auth/login";
+    var uri = Uri.parse(url);
+
+    var result = await _process(
+        requestType: RequestType.get,
+        context: context,
+        url: uri.toString(),
+        needToken: true,
+        token: token,
+        processName: "Profile"
+    );
+
+    if (result == null || (result as Map).isEmpty) return null;
+
+//    if (result["error_message"] != "") {
+//      Toast.showToast(context, "Error : ${result["error_message"]}");
+//      return null;
+//    }
+    //await registerTokenFirebase(context, tokenFirebase: application.tokenFirebase);
+    await AccountHelper.saveUserProfile(result);
+
+    return UserProfileModel.fromJson(result);
   }
 
 }

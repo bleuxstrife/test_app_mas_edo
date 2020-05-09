@@ -4,7 +4,9 @@ import 'package:fluttertestapp/boilerplates/presenter.dart';
 import 'package:fluttertestapp/boilerplates/view.dart';
 import 'package:fluttertestapp/component/toast.dart';
 import 'package:fluttertestapp/engine/engine_auth.dart';
+import 'package:fluttertestapp/models/user.dart';
 import 'package:fluttertestapp/pages/home/MainScreen.dart';
+import 'package:fluttertestapp/utilities/account_helper.dart';
 import 'package:fluttertestapp/utilities/routing.dart';
 
 class LoginPresenter extends Presenter {
@@ -14,7 +16,7 @@ class LoginPresenter extends Presenter {
   TextEditingController _passwordController = new TextEditingController();
 
   LoginPresenter(BuildContext context, View<StatefulWidget> view) : super(context, view);
-
+  UserProfileModel user;
   @override
   void init() {
     // TODO: implement init
@@ -41,8 +43,14 @@ class LoginPresenter extends Presenter {
       }
       bool isLogin =  await APIRequest.user.login(context);
 
-      if(isLogin)
-        Routing.pushAndRemoveUntil(context, MainScreen(), (_)=>false);
+      if(isLogin){
+        user = await APIRequest.user.userProfile(context);
+        if(user!=null){
+          Routing.pushAndRemoveUntil(context, MainScreen(user: user), (_)=>false);
+        } else {
+          AccountHelper.logOut(context);
+        }
+      }
     });
   }
 

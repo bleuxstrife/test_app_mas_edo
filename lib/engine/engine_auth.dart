@@ -8,6 +8,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:fluttertestapp/component/toast.dart';
+import 'package:fluttertestapp/models/user.dart';
 import 'package:fluttertestapp/utilities/account_helper.dart';
 import 'package:fluttertestapp/utilities/localization.dart';
 import 'package:fluttertestapp/utilities/log_helper.dart';

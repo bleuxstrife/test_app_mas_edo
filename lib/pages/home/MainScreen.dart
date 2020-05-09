@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:fluttertestapp/boilerplates/view.dart';
+import 'package:fluttertestapp/models/user.dart';
+import 'package:fluttertestapp/presenter/main_screen_presenter.dart';
 
 final List<String> imgList = [
   'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
@@ -12,7 +14,9 @@ final List<String> imgList = [
 ];
 
 class MainScreen extends StatefulWidget {
-  static const routeName = '/main';
+  final UserProfileModel user;
+
+  MainScreen({this.user});
 
   @override
   _MainScreenState createState() => _MainScreenState();
@@ -20,6 +24,7 @@ class MainScreen extends StatefulWidget {
 
 class _MainScreenState extends View<MainScreen> {
   int _current = 0;
+  MainScreenPresenter _presenter;
   final List<Widget> imageSliders = imgList
       .map((item) => Container(
     child: Container(
@@ -66,6 +71,7 @@ class _MainScreenState extends View<MainScreen> {
   @override
   void initStateWithContext(BuildContext context) {
     super.initStateWithContext(context);
+    _presenter = MainScreenPresenter(context, this, widget.user);
   }
 
   @override

@@ -19,22 +19,21 @@ class _LoginScreenState extends View<LoginScreen> {
   @override
   Widget buildView(BuildContext context) {
 
-
     return Scaffold(
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              child: Image.asset(
-                'images/pertamina-logo.png',
-                width: 200,
-                height: 53,
-                fit: BoxFit.cover,
-              ),
-              margin: const EdgeInsets.all(40.0),
-              alignment: Alignment.centerLeft,
-            ),
+//            Container(
+//              child: Image.asset(
+//                'images/pertamina-logo.png',
+//                width: 200,
+//                height: 53,
+//                fit: BoxFit.cover,
+//              ),
+//              margin: const EdgeInsets.all(40.0),
+//              alignment: Alignment.centerLeft,
+//            ),
             Container(
               child: Text(
                 'Hi, \nSelamat Datang!',
